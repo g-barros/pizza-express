@@ -4,7 +4,7 @@ const rotas = express.Router();
 
 rotas.get('/:nome', (req, res) => {
     let {nome} = req.params;
-    res.send(`Seja bem-vindo, ${nome}!`);
+    res.render('usuario', {nome});
 });
 
 module.exports = rotas;

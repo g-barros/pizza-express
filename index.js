@@ -1,13 +1,21 @@
 const express = require('express');
+const methodOverride = require('method-override');
 
 const rotasUsuario = require('./routes/usuarioRoute');
 const rotasCardapio = require('./routes/cardapioRoute');
+const rotasIndex = require('./routes/indexRoute');
 
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send("Você está no sistema da Pizza Express");
-});
+app.set('view engine', 'ejs');
+
+app.use(express.static('public'));
+
+app.use(methodOverride('_method'));
+
+app.use(express.urlencoded({extended: true}));
+
+app.use(rotasIndex);
 app.use('/usuarios', rotasUsuario);
 app.use('/cardapio', rotasCardapio);
 
